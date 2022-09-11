@@ -5,8 +5,7 @@ const ref = require('ref-napi');
 
 const music_path = 'D:/Music/Rob Hubbard - Monty on the Run Theme.mp3';
 const prefix = process.platform == 'win32' ? '' : 'lib';
-fmodex.load_fmodex_library(prefix + 'fmod');
-fmodex.export_fmodex_library(global);
+const dll = fmodex.load_fmodex_library(prefix + 'fmod');
 
 function errcheck() {
   if (err == FMOD_OK)
@@ -18,6 +17,7 @@ let err;
 
 if (true) {
   // C-Like; C++ like will be later (or never :D)
+  fmodex.export_fmodex_library(global);
   var system = ref.alloc('void*').ref(); // Reference for creation
   var sound = ref.alloc('void*').ref();
   var channel = ref.alloc('void*').ref();
