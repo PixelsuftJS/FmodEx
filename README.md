@@ -9,5 +9,5 @@ see [`test.js`](https://github.com/PixelsuftJS/FmodEx/blob/main/test.js)
 ## TODO
  - C++ like bindings
 ## Licenses
-[FmodEx JS Bindings](https://github.com/PixelsuftJS/FmodEx/blob/main/LICENSE) <br />
+[FmodEx JS Bindings](https://github.com/PixelsuftJS/FmodEx/blob/main/LICENSE.md) <br />
 [FMOD](https://www.fmod.com/licensing)
