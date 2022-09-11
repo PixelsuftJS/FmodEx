@@ -15,8 +15,5 @@ exports.export_fmodex_library = function(export_obj) {
   Object.entries(api.join_exports()).forEach(([key, value]) => {
     export_obj[key] = api.l[key];
   });
-  Object.entries(api.join_functions()).forEach(([key, value]) => {
-    export_obj[key] = value;
-  });
   return export_obj;
 }

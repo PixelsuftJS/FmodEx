@@ -1,14 +1,7 @@
 const {
   e,
-  l,
-  ref,
   Struct,
-  Func,
-  ArrayType,
-  from_hex,
-  en,
-  push_export,
-  push_functions
+  Func
 } = require('./api');
 
 e.FMOD_OUTPUT_PLUGIN_VERSION = 5;

@@ -1,14 +1,10 @@
 const {
   e,
-  l,
   ref,
   Struct,
   Func,
   ArrayType,
-  from_hex,
-  en,
-  push_export,
-  push_functions
+  en
 } = require('./api');
 
 e.FMOD_VERSION = 0x00020208;

@@ -6,29 +6,20 @@ const ArrayType = require('ref-array-di')(ref);
 
 var e = (typeof process.env.fmodex_global_export == 'undefined') ? exports : global;
 var library_exports = [];
-var library_functions = [];
 var enerator;
 
 exports.e = e;
 exports.l = {};
 exports.ffi = ffi;
 exports.ref = ref;
-exports.Func = function(...data) {
-  // data[0] += '*';
-  return ffi.Function(...data);
-}
-exports.SFunc = ffi.Function;
+exports.Func = ffi.Function;
 exports.Struct = Struct;
 exports.Union = Union;
 exports.ArrayType = ArrayType;
 exports.library_exports = library_exports;
-exports.library_functions = library_functions;
 
 exports.join_exports = function() {
   return Object.assign({}, ...exports.library_exports);
-}
-exports.join_functions = function() {
-  return Object.assign({}, ...exports.library_functions);
 }
 exports.from_hex = function(hex_str) {
   return parseInt(hex_str, 16);

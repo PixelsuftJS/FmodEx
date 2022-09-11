@@ -1,14 +1,8 @@
 const {
   e,
-  l,
-  ref,
   Struct,
-  Func,
   ArrayType,
-  from_hex,
-  en,
-  push_export,
-  push_functions
+  en
 } = require('./api');
 
 e.FMOD_DSP_LOUDNESS_METER_HISTOGRAM_SAMPLES = 66;

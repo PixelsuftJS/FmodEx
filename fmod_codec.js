@@ -1,14 +1,8 @@
 const {
   e,
-  l,
   ref,
   Struct,
-  Func,
-  ArrayType,
-  from_hex,
-  en,
-  push_export,
-  push_functions
+  Func
 } = require('./api');
 
 e.FMOD_CODEC_SEEK_METHOD_SET = 0;

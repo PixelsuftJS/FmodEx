@@ -1,15 +1,11 @@
 const {
   e,
-  l,
   ref,
   Union,
   Struct,
   Func,
   ArrayType,
-  from_hex,
-  en,
-  push_export,
-  push_functions
+  en
 } = require('./api');
 
 e.FMOD_PLUGIN_SDK_VERSION = 110;
