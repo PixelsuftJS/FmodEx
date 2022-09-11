@@ -10,6 +10,7 @@ const dll = fmodex.load_fmodex_library(prefix + 'fmod');
 if (typeof process.env.USE_CFMOD == 'undefined') {
   // C++ Like
   // Note that is doesn't support default values for classes
+  // Also note that it can be buggy due it's written by hand in most places
   const FMOD = fmodex.init_fmodpp();
   /*
   FMOD.CheckErr = function(error_code) {

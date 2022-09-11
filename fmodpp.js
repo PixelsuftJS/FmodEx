@@ -30,7 +30,7 @@ exports.init_fmodpp = function() {
   r.CheckErr = function(error_code) {
     if (error_code == e.FMOD_OK)
       return e.FMOD_OK;
-    throw FMOD_ErrorString(error_code);
+    throw new Error(e.FMOD_ErrorString(error_code));
     return error_code;
   }
 
