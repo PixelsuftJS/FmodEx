@@ -8,11 +8,11 @@ require('./fmod_dsp');
 require('./fmod');
 
 exports.load_fmodex_library = function(library_path) {
-  api.l = api.ffi.Library(library_path, api.join_exports());
+  api.l = api.ffi.Library(library_path, api.functions);
   return api.l;
 }
 exports.export_fmodex_library = function(export_obj) {
-  Object.entries(api.join_exports()).forEach(([key, value]) => {
+  Object.entries(api.functions).forEach(([key, value]) => {
     export_obj[key] = api.l[key];
   });
   return export_obj;

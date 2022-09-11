@@ -10,6 +10,7 @@ var enerator;
 
 exports.e = e;
 exports.l = {};
+exports.functions = {};
 exports.ffi = ffi;
 exports.ref = ref;
 exports.Func = ffi.Function;
@@ -18,9 +19,6 @@ exports.Union = Union;
 exports.ArrayType = ArrayType;
 exports.library_exports = library_exports;
 
-exports.join_exports = function() {
-  return Object.assign({}, ...exports.library_exports);
-}
 exports.from_hex = function(hex_str) {
   return parseInt(hex_str, 16);
 }

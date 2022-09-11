@@ -22,8 +22,6 @@ if (true) {
   var sound = ref.alloc('void*').ref();
   var channel = ref.alloc('void*').ref();
 
-  // Note that FMOD_VERSION is defined in JS, so, you should have the same
-  // version of the binary or change this variable
   err = FMOD_System_Create(system, FMOD_VERSION);
   errcheck();
   system = system.deref(); // Back it

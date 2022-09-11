@@ -1,9 +1,6 @@
-const {
-  e,
-  push_export
-} = require('./api');
+const api = require('./api');
 
-push_export({
+api.functions = {
   'FMOD_Memory_Initialize': ['int', ['void*', 'int', 'void*', 'void*', 'void*', 'Uint']],
   'FMOD_Memory_GetStats': ['int', ['int*', 'int*', 'int']],
   'FMOD_Debug_Initialize': ['int', ['Uint', 'int', 'void*', 'string']],
@@ -386,4 +383,4 @@ push_export({
   'FMOD_Reverb3D_GetActive': ['int', ['void*', 'int*']],
   'FMOD_Reverb3D_SetUserData': ['int', ['void*', 'void*']],
   'FMOD_Reverb3D_GetUserData': ['int', ['void*', 'void**']]
-});
+};
