@@ -289,7 +289,11 @@ exports.init_fmodpp = function() {
         return r.CheckErr(l.FMOD_ChannelGroup_GetDSPIndex(this._channelgroup, dsp._dsp, index));
       }
       this.addGroup = function(group, propagatedspclock, connection) {
-        return r.CheckErr(l.FMOD_ChannelGroup_AddGroup(this._channelgroup, group._channelgroup, propagatedspclock, connection));
+        const c_dspconnection_p = ref.alloc('void*').ref();
+        const result = l.FMOD_ChannelGroup_AddGroup(this._channelgroup, group._channelgroup, propagatedspclock, connection);
+        r.CheckErr(result);
+        connection._dspconnection = c_dspconnection_p.deref();
+        return result;
       }
       this.getGroup = function(index, group) {
         const c_channelgroup_p = ref.alloc('void*').ref();
@@ -343,7 +347,11 @@ exports.init_fmodpp = function() {
         return r.CheckErr(l.FMOD_DSP_GetSystemObject(this._dsp, system._system));
       }
       this.addInput = function(input, connection, type) {
-        return r.CheckErr(l.FMOD_DSP_AddInput(this._dsp, input._dsp, connection._dspconnection, type));
+        const c_dspconnection_p = ref.alloc('void*').ref();
+        const result = l.FMOD_DSP_AddInput(this._dsp, input._dsp, c_dspconnection_p, type);
+        r.CheckErr(result);
+        connection._dspconnection = c_dspconnection_p.deref();
+        return result;
       }
       this.disconnectFrom = function(target, connection) {
         return r.CheckErr(l.FMOD_DSP_DisconnectFrom(this._dsp, target._dsp, connection._dspconnection));
@@ -351,19 +359,45 @@ exports.init_fmodpp = function() {
       this.getInput = function(index, input, inputconnection) {
         const c_dspconnection_p = ref.alloc('void*').ref();
         const c_dsp_p = ref.alloc('void*').ref();
-        const result = l.FMOD_DSP_GetInput(this._dsp, index, c_dsp_p, inputconnection);
+        const result = l.FMOD_DSP_GetInput(this._dsp, index, c_dsp_p, c_dspconnection_p);
         r.CheckErr(result);
         inputconnection._dspconnection = c_dspconnection_p.deref();
-        inputconnection._dsp = c_dsp_p.deref();
+        input._dsp = c_dsp_p.deref();
         return result;
       }
       this.getOutput = function(index, input, outputconnection) {
         const c_dspconnection_p = ref.alloc('void*').ref();
         const c_dsp_p = ref.alloc('void*').ref();
-        const result = l.FMOD_DSP_GetOutput(this._dsp, index, c_dsp_p, outputconnection);
+        const result = l.FMOD_DSP_GetOutput(this._dsp, index, c_dsp_p, c_dspconnection_p);
         r.CheckErr(result);
         outputconnection._dspconnection = c_dspconnection_p.deref();
-        outputconnection._dsp = c_dsp_p.deref();
+        output._dsp = c_dsp_p.deref();
+        return result;
+      }
+    }
+  }
+  r.DSPConnection = class DSPConnection {
+    constructor() {
+      this._dspconnection = null;
+      Object.entries(api.functions).forEach(([key, value]) => {
+        if (!key.startsWith('FMOD_DSPConnection_'))
+          return;
+        this[key[19].toLowerCase() + key.slice(20)] = function(...data) {
+          return r.CheckErr(l[key](this._dsp, ...data));
+        }
+      });
+      this.getInput = function(dsp, input) {
+        const c_dsp_p = ref.alloc('void*').ref();
+        const result = l.FMOD_DSPConnection_GetInput(this._dspconnection, c_dsp_p);
+        r.CheckErr(result);
+        input._dsp = c_dsp_p.deref();
+        return result;
+      }
+      this.getOutput = function(dsp, output) {
+        const c_dsp_p = ref.alloc('void*').ref();
+        const result = l.FMOD_DSPConnection_GetOutput(this._dspconnection, c_dsp_p);
+        r.CheckErr(result);
+        output._dsp = c_dsp_p.deref();
         return result;
       }
     }
