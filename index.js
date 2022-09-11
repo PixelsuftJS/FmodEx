@@ -1,5 +1,5 @@
 const api = require('./api');
-const fmodpp = require('./fmodpp')
+const fmodpp = require('./fmodpp');
 require('./fmod_common');
 require('./fmod_errors');
 require('./fmod_codec');
