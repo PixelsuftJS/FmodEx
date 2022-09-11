@@ -1,4 +1,5 @@
 const api = require('./api');
+const fmodpp = require('./fmodpp')
 require('./fmod_common');
 require('./fmod_errors');
 require('./fmod_codec');
@@ -17,3 +18,4 @@ exports.export_fmodex_library = function(export_obj) {
   });
   return export_obj;
 }
+exports.init_fmodpp = fmodpp.init_fmodpp;
