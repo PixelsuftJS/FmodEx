@@ -42,5 +42,5 @@ if (true) {
     FMOD_System_Release(system);
     console.log('quit');
     process.exit(0);
-  }, 1000 * 60 * 3); // 3 min
+  }, 1000 * 60 * 6 + 37 * 1000 + 558); // 6:37.558
 }
