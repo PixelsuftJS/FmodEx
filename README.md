@@ -1,4 +1,7 @@
 # fmodex
 Pure JS FmodEx bindings for NodeJS using ffi-napi
+# Examples
+see [`test.js`](https://github.com/PixelsuftJS/FmodEx/blob/main/test.js)
 # TODO
- - write todo
+ - Clean Code <br />
+ - C++ like bindings
