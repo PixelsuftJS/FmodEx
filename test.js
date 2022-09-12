@@ -22,19 +22,37 @@ if (typeof process.env.USE_CFMOD == 'undefined') {
   const system = new FMOD.System();
   const sound = new FMOD.Sound();
   const channel = new FMOD.Channel();
+  const len_p = new Uint32Array(1); // "Emulate" pointer
+  const pos_p = new Uint32Array(1);
+  const freq_p = new Float32Array(1);
+  const start_speed = 0.5;
+  const end_speed = 4.0;
 
   system.init(32, FMOD_INIT_NORMAL, null);
-  system.createSound(music_path, FMOD_DEFAULT, null, sound);
+  system.createSound(music_path, FMOD_2D, null, sound);
   sound.setMode(FMOD_LOOP_OFF);
+  sound.getLength(len_p, FMOD_TIMEUNIT_MS);
+  console.log('Sound Length: ');
+  console.log(`${Math.floor(Math.floor(len_p[0] / 1000) / 60)}:${Math.floor(len_p[0] / 1000) % 60}`);
   system.playSound(sound, null, false, channel);
+  channel.getFrequency(freq_p);
 
-  setTimeout(function() {
-    sound.release();
-    system.close();
-    system.release();
-    console.log('quit');
-    process.exit(0);
-  }, 1000 * 60 * 6 + 37 * 1000 + 558); // 6:37.558
+  function tick() {
+    system.update();
+    try {
+      channel.getPosition(pos_p, FMOD_TIMEUNIT_MS);
+      channel.setFrequency((pos_p[0] / len_p[0] * (end_speed - start_speed) + start_speed) * freq_p);
+      setImmediate(tick);
+    } catch (err) {
+      console.log('quit');
+      sound.release();
+      system.close();
+      system.release();
+      process.exit(0);
+      return;
+    }
+  }
+  setImmediate(tick);
 } else {
   // C like
   fmodex.export_fmodex_library(global);
@@ -70,5 +88,5 @@ if (typeof process.env.USE_CFMOD == 'undefined') {
     FMOD_System_Release(system);
     console.log('quit');
     process.exit(0);
-  }, 1000 * 60 * 6 + 37 * 1000 + 558);
+  }, 1000 * 60 * 6 + 37 * 1000 + 558); // 6:37.558
 }
