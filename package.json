@@ -1,6 +1,6 @@
 {
   "name": "fmodex",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Pure FmodEx bindings for NodeJS using ffi-napi",
   "main": "index.js",
   "scripts": {
